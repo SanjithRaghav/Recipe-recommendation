@@ -1,0 +1,17 @@
+{
+  "name": "reciperecommendation",
+  "version": "1.0.0",
+  "description": "recipe recomendation based on the ingredients",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "node-fetch": "^3.2.10"
+  }
+}
