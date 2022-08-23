@@ -1,23 +1,42 @@
 <%-include('header');-%>
 <body>
-    <ul>
-        <%for(var i=0;i<ingList.length;i++) {%>
-            <li><%=ingList[i]%></li>
-        <%}%>
-    </ul>
+    <%if(display=='edit'){%>
+        <form method="post" action="/">
+            <%for(var i=0;i<ingList.length;i++) {%>
+                <input type="checkbox" id="<%=("item"+i)%>" name='value[]'  value=<%=ingList[i]%>>
+                
+                <label for="<%=("item"+i)%>"> <%=ingList[i]%></label>
+                <br>
+            <%}%>  
+            <br>
+            <button name="button" type="submit" value="remove-item" class="btn btn-dark btn-sm">remove</button>
+        </form>
+    <%}else{%>
+        <ul>
+            <%for(var i=0;i<ingList.length;i++) {%>
+                <li><%=ingList[i]%></li>
+            <%}%>
+        </ul>
+        <br>
+        <form method="post" action="/">
+            <input type="text" id="ingredient" name="ingredient" placeholder="add ingredient">
+            <button name="button" type="submit" value="add" class="btn btn-dark btn-sm">add</button>
+            <button name="button" type="submit" value="remove" class="btn btn-dark btn-sm">remove</button>
+            <button name="button" type="submit" value="get recipe" class="btn btn-dark btn-sm">GET Recipe</button>
+            
+        </form>
+    <%}%>
+   
     
-<form method="post" action="/">
-    <input type="text" id="ingredient" name="ingredient" placeholder="add ingredient">
-    <button name="button" type="submit" value="add" class="btn btn-dark btn-sm">add</button>
-    <button name="button" type="submit" value="get recipe" class="btn btn-dark btn-sm">GET Recipe</button>
-</form>    
-<br>
+    
 <%for(var i=0;i<data.length;i++){%>
     <div class="card" style="width: 18rem;">
         <img src=<%=data[i].image%> class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title"><%=data[i].title%></h5>
-          <a href='' class="btn btn-dark btn-sm">Steps</a>
+          <form method="post" action="/">
+            <button name="button" type="submit" value="<%=data[i].id%>" class="btn btn-dark btn-sm">Steps</button>
+          </form>
         </div>
     </div>
 <%}%>
