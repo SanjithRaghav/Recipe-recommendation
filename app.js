@@ -3,6 +3,7 @@ const bodyParser=require('body-parser')
 const https=require('https')
 //const fetch = require('node-fetch');
 const app = express()
+app.use(express.static('public'))
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.listen(3000);
@@ -28,7 +29,7 @@ app.post('/', (req, res) => {
             var endpoint='https://api.spoonacular.com/recipes/findByIngredients';
             var apiKey='1a82a343ac7c4054a537cd559b21c74e'
             var ingredients=ingList[0];
-            var number=5;
+            var number=6;
             for(var i=1;i<ingList.length;i++){
                 ingredients+=',+';
                 ingredients+=ingList[i];
@@ -53,12 +54,15 @@ app.post('/', (req, res) => {
     }
     else if(req.body.button=='remove-item'){
         console.log(req.body);
-        for(var i=0;i<req.body.value.length;i++){
-            const index=ingList.indexOf(req.body.value[i]);
-            if (index > -1) { // only splice array when item is found
-                ingList.splice(index, 1); // 2nd parameter means remove one item only
+        if(req.body.value){
+            for(var i=0;i<req.body.value.length;i++){
+                const index=ingList.indexOf(req.body.value[i]);
+                if (index > -1) { // only splice array when item is found
+                    ingList.splice(index, 1); // 2nd parameter means remove one item only
+                }
             }
         }
+        
         res.redirect('/');
         
     }

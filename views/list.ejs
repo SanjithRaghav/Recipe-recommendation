@@ -1,46 +1,114 @@
 <%-include('header');-%>
 <body>
-    <%if(display=='edit'){%>
-        <form method="post" action="/">
-            <%for(var i=0;i<ingList.length;i++) {%>
-                <input type="checkbox" id="<%=("item"+i)%>" name='value[]'  value=<%=ingList[i]%>>
-                
-                <label for="<%=("item"+i)%>"> <%=ingList[i]%></label>
-                <br>
-            <%}%>  
-            <br>
-            <button name="button" type="submit" value="remove-item" class="btn btn-dark btn-sm">remove</button>
-        </form>
-    <%}else{%>
-        <ul>
-            <%for(var i=0;i<ingList.length;i++) {%>
-                <li><%=ingList[i]%></li>
-            <%}%>
-        </ul>
-        <br>
-        <form method="post" action="/">
-            <input type="text" id="ingredient" name="ingredient" placeholder="add ingredient">
-            <button name="button" type="submit" value="add" class="btn btn-dark btn-sm">add</button>
-            <button name="button" type="submit" value="remove" class="btn btn-dark btn-sm">remove</button>
-            <button name="button" type="submit" value="get recipe" class="btn btn-dark btn-sm">GET Recipe</button>
-            
-        </form>
-    <%}%>
-   
     
-    
-<%for(var i=0;i<data.length;i++){%>
-    <div class="card" style="width: 18rem;">
-        <img src=<%=data[i].image%> class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%=data[i].title%></h5>
-          <form method="post" action="/">
-            <button name="button" type="submit" value="<%=data[i].id%>" class="btn btn-dark btn-sm">Steps</button>
-          </form>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+          <div class="navbar-brand d-flex align-items-center">
+            <i class="fa-solid fa-kitchen-set"></i>
+            <strong>Cookatron</strong>
+          </div>
         </div>
-    </div>
-<%}%>
+      </div>
+    </header>
+    
+    <main>
+    
+      <section class="py-5 text-center container">
+        <%if(display=='edit'){%>
+            
+            <form method="post" action="/">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                      <h1 class="fw-light mb-5">Enter the ingredients</h1>
+                      <%if(ingList.length!=0){%>
+                        
+                            <div class="card mx-auto ingList" style="width: 18rem;">
+                                <ul class="list-group list-group-flush mx-2 my-3">
+                                    <%for(var i=0;i<ingList.length;i++) {%>
+                                        <li class="list-group-item ingList">
+                                            <input class="form-check-input" type="checkbox" id="<%=("item"+i)%>" name='value[]'  value=<%=ingList[i]%>>
+                                            <label for="<%=("item"+i)%>"> <%=ingList[i]%></label>
+                                        </li>
+                                    <%}%>
+                                </ul>
+                            </div>
+                            <br>
+                            <button name="button" type="submit" value="remove-item" class="btn btn-dark btn-sm">remove</button>
+                      <%}%>
+                      
+                    </div>
+                </div>
+            </form>
+        <%}else{%>
+            
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                  <h1 class="fw-light mb-5">Enter the ingredients</h1>
+                  <%if(ingList.length!=0){%>
+                    <div class="card mx-auto ingList" style="width: 18rem;">
+                        <ul class="list-group list-group-flush mx-2 my-3">
+                            <%for(var i=0;i<ingList.length;i++) {%>
+                                <li class="list-group-item ingList"><%=ingList[i]%></li>
+                            <%}%>
+                        </ul>
+                      </div>
+                  <%}%>
+                  
+                    <br>
+                  <form method="post" action="/">
+                      <input  class="form-control" type="text" id="ingredient" name="ingredient">
+                      <p>
+                          <button name="button" type="submit" value="add" class="btn btn-dark  mt-3 mb-2 mx-3">add ingredient</button>
+                          <button name="button" type="submit" value="remove" class="btn btn-dark  mt-3 mb-2 mx-3">remove ingredient</button>
+                      </p>
+                      <p>
+                          <button name="button" type="submit" value="get recipe" class="btn btn-dark  my-1">GET Recipe</button>
+                      </p>
+                      
+                  </form>
+                </div>
+            </div>
+            
+        <%}%>
+        
+      </section>
+     
+        <div class="album py-5 bg-light">
+                <div class="container">
+                    
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                        <%for(var i=0;i<data.length;i++){%>
+                        <div class="col">
+                            <div class="card" style="width: 18rem;">
+                                <img src=<%=data[i].image%> class="card-img-top" alt="...">
+                                <div class="card-body">
+                                <h5 class="card-title"><%=data[i].title%></h5>
+                                <form method="post" action="/">
+                                    <button name="button" type="submit" value="<%=data[i].id%>" class="btn btn-dark btn-sm">Steps</button>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
+                    
+                </div>
+            </div>
+        
+    </main>
+    
+    <footer class="text-muted py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">Made with <i class="fa-solid fa-heart"></i> by sanjith</p>
+        
+      </div>
+    </footer>
+    
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/abe0947dcd.js" crossorigin="anonymous"></script>
 </html>
